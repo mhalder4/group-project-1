@@ -1,4 +1,5 @@
-var bodyElem = $("body");
+const bodyElem = $("body");
+const logosMainElem = $(".team-logos");
 
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
@@ -53,12 +54,13 @@ function concatArrays(arr1, arr2, arr3, arr4) {
 
 const allTeamAbbr = concatArrays(atlantic, metropolitan, central, pacific);
 
-function pullTeamLogo(abbrArray, startingIndex) {
+function pullTeamLogo(abbrArray, index) {
 
-  var logoURL = `https://assets.nhle.com/logos/nhl/svg/${abbrArray[startingIndex]}_light.svg`;
+  var logoURL = `https://assets.nhle.com/logos/nhl/svg/${abbrArray[index]}_light.svg`;
   var teamLogo = $("<img>");
   teamLogo.attr("src", logoURL);
   teamLogo.attr("class", "logo");
+  teamLogo.attr("id", abbrArray[index]);
   teamLogo.attr("style", "width: 100px; height: 100px");
   // elem.append(teamLogo);
   return teamLogo;
@@ -111,7 +113,10 @@ function addTeamLogos() {
   }
 }
 
-// function store
+function showLogoClicked(code) {
+  var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
+  bodyElem.append(displayLogo);
+}
 
 
 
@@ -211,3 +216,10 @@ fetch(gameURL)
 addTeamLogos();
 
 console.log(atlantic.concat(metropolitan, central, pacific));
+
+logosMainElem.on("click", ".logo", function () {
+  var logoClicked = this.id;
+  console.log(logoClicked);
+  console.log("Logo clicked.");
+  showLogoClicked(logoClicked);
+});
