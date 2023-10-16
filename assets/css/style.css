@@ -25,7 +25,7 @@ body {
     background-color: green;
     padding: 5px;
     text-align: center;
-    font-size:xx-large;
+    font-size: xx-large;
 }
 
 .scoreBoard {
@@ -40,11 +40,25 @@ body {
 }
 
 .subText {
-    background-color: green;
+    background-color: #050505;
+    color: white
 }
 
 .rules {
     color: white;
     font-size: larger;
     text-indent: 5%;
+}
+
+.last-container {
+    background-color: black;
+}
+
+.leaderBoard {
+    margin-left: 30%;
+}
+
+.nhlWebsite {
+    margin-right: 30%;
+    
 }
