@@ -50,10 +50,51 @@ fetch(gameURL)
   })
   .then(function (data) {
     console.log(data);
-    // console.log(data.teams.home.team.name);
-    // console.log(data.teams.home.teamStats.teamSkaterStats.goals);
-    // console.log(data.teams.away.team.name);
-    // console.log(data.teams.away.teamStats.teamSkaterStats.goals);
+    console.log(dayjs(data.gameData.datetime.dateTime).format("MMM DD, YYYY"))
+    //home team and home score
+    console.log(data.gameData.teams.home.name);
+    console.log(data.gameData.teams.home.abbreviation);
+    console.log(data.gameData.teams.home.conference.name);
+    console.log(data.gameData.teams.home.division.name);
+    console.log(data.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals);
+    var homePeople = data.liveData.boxscore.teams.home.onIce;
+    homePeople.forEach(function(item) {
+      fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          // console.log(data);
+          let playerName = data.people[0].fullName;
+          let playerNumber = data.people[0].primaryNumber;
+          console.log(`${playerNumber} ${playerName}`);
+        })
+    })
+
+    // away team and away score
+    console.log(data.gameData.teams.away.name);
+    console.log(data.gameData.teams.away.abbreviation);
+    console.log(data.gameData.teams.away.conference.name);
+    console.log(data.gameData.teams.away.division.name);
+    console.log(data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
+    var awayPeople = data.liveData.boxscore.teams.away.onIce;
+    awayPeople.forEach(function(item) {
+      fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          // console.log(data);
+          let playerName = data.people[0].fullName;
+          let playerNumber = data.people[0].primaryNumber;
+          console.log(`${playerNumber} ${playerName}`);
+        })
+    })
+
+    // venue the game took place at
+    console.log(data.gameData.venue.name);
+
+
   })
 
 
