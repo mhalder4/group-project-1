@@ -65,3 +65,16 @@ body {
     font-size: larger;
     text-indent: 5%;
 }
+
+.last-container {
+    background-color: black;
+}
+
+.leaderBoard {
+    margin-left: 30%;
+}
+
+.nhlWebsite {
+    margin-right: 30%;
+    
+}
