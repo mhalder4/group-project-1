@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color:black;
 }
 
 .icon {
@@ -9,7 +9,6 @@ body {
 .banner {
     position: absolute;
     width: 75%;
-    margin-top: 3.5px;
 }
 
 .PlayBTN {
@@ -21,30 +20,56 @@ body {
     padding: 5%;
 }
 
+.voided {
+    padding: 1%;
+}
+
 .subTitle {
-    background-color: green;
+    background-color:aqua;
     padding: 5px;
     text-align: center;
     font-size:xx-large;
+    color: black;
 }
 
 .scoreBoard {
-    background-color: green;
+    background-color:aqua;
     padding: 5px;
 }
 
+.First {
+    color:black;
+}
+
+.Second {
+    color:black;
+}
+
+.Third {
+    color:black;
+}
+
 .text {
-    color: white;
+    color:aqua;
     font-size: larger;
     text-indent: 5%;
 }
 
 .subText {
-    background-color: green;
+    color: aqua;
 }
 
 .rules {
-    color: white;
+    color:aqua;
     font-size: larger;
     text-indent: 5%;
+}
+
+.leaderBoardBtn {
+    margin-left: 30%;
+}
+
+.nhlWebsiteBtn {
+    position: absolute;
+    margin-left: 30%;
 }
