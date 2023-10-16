@@ -9,7 +9,6 @@ body {
 .banner {
     position: absolute;
     width: 75%;
-    margin-top: 3.5px;
 }
 
 .PlayBTN {
@@ -21,16 +20,33 @@ body {
     padding: 5%;
 }
 
+.voided {
+    padding: 1%;
+}
+
 .subTitle {
-    background-color: green;
+    background-color:aqua;
     padding: 5px;
     text-align: center;
-    font-size: xx-large;
+    font-size:xx-large;
+    color: black;
 }
 
 .scoreBoard {
-    background-color: green;
+    background-color:aqua;
     padding: 5px;
+}
+
+.First {
+    color:black;
+}
+
+.Second {
+    color:black;
+}
+
+.Third {
+    color:black;
 }
 
 .text {
@@ -40,8 +56,8 @@ body {
 }
 
 .subText {
-    background-color: #050505;
-    color: white
+    background-color:aqua;
+    color: black;
 }
 
 .rules {
