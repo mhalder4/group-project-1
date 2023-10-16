@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color:black;
 }
 
 .icon {
@@ -50,31 +50,26 @@ body {
 }
 
 .text {
-    color: white;
+    color:aqua;
     font-size: larger;
     text-indent: 5%;
 }
 
 .subText {
-    background-color:aqua;
-    color: black;
+    color: aqua;
 }
 
 .rules {
-    color: white;
+    color:aqua;
     font-size: larger;
     text-indent: 5%;
 }
 
-.last-container {
-    background-color: black;
-}
-
-.leaderBoard {
+.leaderBoardBtn {
     margin-left: 30%;
 }
 
-.nhlWebsite {
-    margin-right: 30%;
-    
+.nhlWebsiteBtn {
+    position: absolute;
+    margin-left: 30%;
 }
