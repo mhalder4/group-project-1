@@ -1,0 +1,23 @@
+
+.question-box {
+    background-color: lightgrey;
+    width: 300px;
+    border: 5px solid rgb(12, 12, 12);
+    padding: 150px;
+    margin: 50px;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("");
+}
+
+body {
+    background-image: url("https://th.bing.com/th/id/R.9f24cfab11396c239b06ef9912f84ad7?rik=nhXyyphQiunDlA&riu=http%3a%2f%2fwww.zastavki.com%2fpictures%2foriginals%2f2014%2fSport_Hockey_team_080377_.jpg&ehk=BKNzo%2fxieG3rsYOb6QMyawuHd51i%2ff3roSdIhlirX1Y%3d&risl=&pid=ImgRaw&r=0");
+    
+}
+.title-1{
+    color: rgb(203, 203, 227);
+    
+}
