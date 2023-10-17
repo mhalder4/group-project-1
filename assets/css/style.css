@@ -18,10 +18,18 @@ body {
 
 .void {
     padding: 5%;
+    color: black;
+}
+
+.rift {
+    padding: 5%;
+    background-color: black;
+    color: black;
 }
 
 .voided {
     padding: 1%;
+    color: black;
 }
 
 .subTitle {
@@ -93,6 +101,42 @@ body {
 }
 
 .Facebook {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Snapchat {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Twitter {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Tinder {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.OnlyFans {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Tik-Tok {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.GYM {
     text-decoration: none;
     color: aqua;
     padding: 1%;
