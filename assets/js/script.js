@@ -263,20 +263,35 @@ logosMainElem.on("click", ".logo", function () {
   guessedAway = ansArr[1];
 });
 
+var checks = [];
+var yes = "✅";
+var maybe = "❎";
+var no = "❌";
+
 $("#submitAns").on("click", function() {
-  if (guessedHome === homeAbr && guessedAway === awayAbr) {
-    console.log("✅✅ You got it!");
+  checks = [];
+  if (ansArr[0] === homeAbr) {
+    checks.push(yes);
   }
-  else if (guessedHome === homeAbr && guessedAway != awayAbr) {
-    console.log("✅❌")
-  }
-  else if (guessedHome != homeAbr && guessedAway === awayAbr) {
-    console.log("❌✅")
+  else if (ansArr[0] === awayAbr) {
+    checks.push(maybe);
   }
   else {
-    console.log("❌❌");
+    checks.push(no);
+  }
+  if (ansArr[1] === awayAbr) {
+    checks.push(yes);
+  }
+  else if (ansArr[1] === homeAbr) {
+    checks.push(maybe);
+  }
+  else {
+    checks.push(no);
   }
   ansArr = [];
   count = 0;
   $("#guessed").empty();
+  checks = checks.toString();
+  checks = checks.replace(",", " ");
+  console.log(checks);
 })
