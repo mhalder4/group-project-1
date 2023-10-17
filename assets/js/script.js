@@ -25,11 +25,14 @@ function Team(isHome, name, abbr, score, conf, divi, players) {
   this.teamPlayers = players;
 };
 
+
+
 // The ID of the game. The first 4 digits identify the season of the game (ie. 2017 for the 2017-2018 season). The next 2 digits give the type of game, where 01 = preseason, 02 = regular season, 03 = playoffs, 04 = all-star. The final 4 digits identify the specific game number. For regular season and preseason games, this ranges from 0001 to the number of games played. (1271 for seasons with 31 teams (2017 and onwards) and 1230 for seasons with 30 teams). For playoff games, the 2nd digit of the specific number gives the round of the playoffs, the 3rd digit specifies the matchup, and the 4th digit specifies the game (out of 7).
 function generateRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// randomly picks a number for the gameID - this essentially randomly picks a game from the season
 function randomizeGameId() {
   let gameYear;
   let gameType;
@@ -45,7 +48,8 @@ function randomizeGameId() {
   console.log(gameID);
   return gameID;
 }
-
+// THIS NEEDS TO BE RESTRUCTURED
+// combines all team abbreviations of the different divisions
 function concatArrays(arr1, arr2, arr3, arr4) {
   var arr = arr1.concat(arr2, arr3, arr4);
   arr.sort();
@@ -85,7 +89,8 @@ function pullTeamLogo(abbrArray, index) {
 }
 
 function addTeamLogos() {
-  var logosElem = $(".team-logos");
+  var logosElem = $(".logos");
+  
 
   var logosIndex = 0;
 
@@ -96,13 +101,13 @@ function addTeamLogos() {
     console.log(`Loop ${i} complete`);
     var logosRowElem = $(`.team-logo-row-${i}`);
     for (var j = 0; j < 2; j++) {
-      logosRowElem.append(`<div class="col-6 logos-col-${i}-${j}" style="display:flex; flex-wrap: wrap">
+      logosRowElem.append(`<div class="d-flex col-6 logos-col-${i}-${j}">
       </div>`);
       var logosColElem = $(`.logos-col-${i}-${j}`);
       console.log(`Loop ${i}-${j} complete`);
       for (var k = 0; k < 4; k++) {
         var logoElem = pullTeamLogo(allTeamAbbr, logosIndex);
-        logosColElem.append(`<div class="col-3 logos-box-${i}-${j}-${k}"></div>`);
+        logosColElem.append(`<div class="logos-box-${i}-${j}-${k}"></div>`);
         var logoBoxElem = $(`.logos-box-${i}-${j}-${k}`);
         logoBoxElem.append(logoElem);
         logosIndex++;
@@ -114,11 +119,10 @@ function addTeamLogos() {
 }
 
 function showLogoClicked(code) {
-  var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
-  bodyElem.append(displayLogo);
-}
-
-
+  
+    var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
+    bodyElem.append(displayLogo);
+  }
 
 
 
@@ -133,6 +137,19 @@ gameURL += gameID + "/feed/live";
 
 // `https://statsapi.web.nhl.com/api/v1/game/${gameID}/boxscore`
 
+// Might have to define all variables in global scope so that on.click can read them
+var homeName;
+var homeAbr;
+var homeConf;
+var homeDivi;
+var homeScore;
+
+var awayName;
+var awayAbr;
+var awayConf;
+var awayDivi;
+var awayScore;
+
 fetch(gameURL)
   .then(function (response) {
     return response.json();
@@ -140,18 +157,17 @@ fetch(gameURL)
   .then(function (data) {
     console.log(data);
     console.log(dayjs(data.gameData.datetime.dateTime).format("MMM DD, YYYY"))
-    //home team and home score
     console.log(data.gameData.teams.home.name);
     console.log(data.gameData.teams.home.abbreviation);
     console.log(data.gameData.teams.home.conference.name);
     console.log(data.gameData.teams.home.division.name);
     console.log(data.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals);
 
-    var homeName = (data.gameData.teams.home.name);
-    var homeAbr = (data.gameData.teams.home.abbreviation);
-    var homeConf = (data.gameData.teams.home.conference.name);
-    var homeDivi = (data.gameData.teams.home.division.name);
-    var homeScore = (data.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals);
+    homeName = (data.gameData.teams.home.name);
+    homeAbr = (data.gameData.teams.home.abbreviation);
+    homeConf = (data.gameData.teams.home.conference.name);
+    homeDivi = (data.gameData.teams.home.division.name);
+    homeScore = (data.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals);
     var homePlayers = [];
 
 
@@ -172,18 +188,16 @@ fetch(gameURL)
 
     homeTeam = new Team(true, homeName, homeAbr, homeScore, homeConf, homeDivi, homePlayers);
 
-    // away team and away score
     console.log(data.gameData.teams.away.name);
-    console.log(data.gameData.teams.away.abbreviation);
     console.log(data.gameData.teams.away.conference.name);
     console.log(data.gameData.teams.away.division.name);
     console.log(data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
 
-    var awayName = (data.gameData.teams.away.name);
-    var awayAbr = (data.gameData.teams.away.abbreviation);
-    var awayConf = (data.gameData.teams.away.conference.name);
-    var awayDivi = (data.gameData.teams.away.division.name);
-    var awayScore = (data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
+    awayName = (data.gameData.teams.away.name);
+    awayAbr = (data.gameData.teams.away.abbreviation);
+    awayConf = (data.gameData.teams.away.conference.name);
+    awayDivi = (data.gameData.teams.away.division.name);
+    awayScore = (data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
     var awayPlayers = [];
 
     var awayPeople = data.liveData.boxscore.teams.away.onIce;
@@ -201,10 +215,26 @@ fetch(gameURL)
         })
     })
 
+    $("#scoreBox").text(`${homeScore}(H) : ${awayScore}(A)`)
     awayTeam = new Team(false, awayName, awayAbr, awayScore, awayConf, awayDivi, awayPlayers)
 
     // venue the game took place at
-    console.log(data.gameData.venue.name);
+    let venue = (data.gameData.venue.name);
+    console.log(venue);
+    let venueLink = venue.replaceAll(" ", "+");
+    // ADBLOCKER MUST BE DISABLED FOR THIS TO WORK
+    $("body").append(`
+    <iframe
+      style="display: none"
+      width="500"
+      height="300"
+      style="border:0"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDTxotnfke5TbqtSkPZSB4OkoPgi-cgYsc
+        &q=${venueLink}">
+  </iframe>`)
 
     console.log(awayTeam);
     console.log(homeTeam);
@@ -217,9 +247,35 @@ addTeamLogos();
 
 console.log(atlantic.concat(metropolitan, central, pacific));
 
+// the ansArr and count variables make it so the user can only select 2 teams from the choices
+var guessedHome;
+var guessedAway;
+var ansArr = [];
+let count = 0;
 logosMainElem.on("click", ".logo", function () {
-  var logoClicked = this.id;
-  console.log(logoClicked);
-  console.log("Logo clicked.");
-  showLogoClicked(logoClicked);
+  if (count < 2) {
+    var logoClicked = this.id;
+    console.log(logoClicked);
+    console.log("Logo clicked.");
+    showLogoClicked(logoClicked);
+    ansArr.push(this.id);
+    count += 1;
+  } 
+  guessedHome = ansArr[0];
+  guessedAway = ansArr[1];
 });
+
+$("#submitAns").on("click", function() {
+  if (guessedHome === homeAbr && guessedAway === awayAbr) {
+    console.log("You got it!");
+  }
+  else if (guessedHome === homeAbr && guessedAway != awayAbr) {
+    console.log("✅❌")
+  }
+  else if (guessedHome != homeAbr && guessedAway === awayAbr) {
+    console.log("❌✅")
+  }
+  else {
+    console.log("❌❌");
+  }
+})

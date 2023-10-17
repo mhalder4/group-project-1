@@ -9,17 +9,18 @@
 </head>
 
 <body>
+  
+  <div id="gameInfo">
+    <div class="row justify-content-center">
+      <h1 class="col-2">Score:</h1>
+      <h1 class="col-3" id="scoreBox"></h1>
+    </div>
 
-  <!-- <div class="team-logos">
-    <table>
-      <tr class="first-row"></tr>
-      <tr class="second-row"></tr>
-      <tr class="third-row"></tr>
-      <tr class="fourth-row"></tr>
-    </table>
-  </div> -->
 
-  <div class="container team-logos">
+  </div>
+
+  <div class="container team-logos mx-auto">
+    <div class="logos row align-items-end">
     <!-- <div class="row team-logo-row" style="display:flex; flex-wrap: wrap">
       <div class="col-6" style="display:flex; flex-wrap: wrap">
         <div class="col-3">Test1</div>
@@ -48,8 +49,11 @@
         <div class="col-3">Test4</div>
       </div>
     </div> -->
+    </div>
   </div>
-
+  <button id="submitAns" class="btn btn-secondary">
+    Submit
+  </button>
 
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
@@ -57,5 +61,8 @@
   <script src="./assets/js/script.js"></script>
 
 </body>
+<footer style="text-align: center; position:fixed;bottom:0px;width:auto;">
+  NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the property of the NHL and its teams. © NHL 2023. All Rights Reserved.
+</footer>
 
 </html>
