@@ -9,7 +9,6 @@ body {
 .banner {
     position: absolute;
     width: 75%;
-    margin-top: 3.5px;
 }
 
 .PlayBTN {
@@ -21,16 +20,33 @@ body {
     padding: 5%;
 }
 
+.voided {
+    padding: 1%;
+}
+
 .subTitle {
-    background-color: green;
+    background-color:aqua;
     padding: 5px;
     text-align: center;
-    font-size: xx-large;
+    font-size:xx-large;
+    color: black;
 }
 
 .scoreBoard {
-    background-color: green;
+    background-color:aqua;
     padding: 5px;
+}
+
+.First {
+    color:black;
+}
+
+.Second {
+    color:black;
+}
+
+.Third {
+    color:black;
 }
 
 .text {
@@ -40,18 +56,18 @@ body {
 }
 
 .subText {
-    background-color: #050505;
-    color: white
+    background-color: black;
+    color: aqua;
 }
 
 .rules {
-    color: white;
+    color: aqua;
     font-size: larger;
     text-indent: 5%;
 }
 
 .last-container {
-    background-color: rgb(69, 67, 67);
+    background-color: black;
 }
 
 .leaderBoard {
@@ -59,6 +75,66 @@ body {
 }
 
 .nhlWebsite {
-    margin-left: 40%;
+    margin-left: 50%;
     
+}
+
+.modal {
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid aqua;
+    border-radius: 10px;
+    z-index:10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1); 
+}
+.modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid aqua;
+}
+
+.modal-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+
+}
+
+.modal-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 10px 15px
+}
+
+#overlay {
+    position: fixed;
+    /* opacity: 0; */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+
+#overlay.active{
+    opacity: 1;
+    pointer-events: all;
 }

@@ -27,6 +27,15 @@ function randomizeGameId() {
   return gameID;
 }
 
+// leader board modal
+function openLeaderboard() {
+  document.querySelector(".popup").style.display = "block";
+}
+
+function closeLeaderboard() {
+  document.querySelector(".popup").style.display = "none";
+}
+
 // function store
 
 
@@ -96,5 +105,6 @@ fetch(gameURL)
 
 
   })
+
 
 
