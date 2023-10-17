@@ -67,7 +67,7 @@ function pullTeamLogo(abbrArray, index) {
   teamLogo.attr("src", logoURL);
   teamLogo.attr("class", "logo");
   teamLogo.attr("id", abbrArray[index]);
-  teamLogo.attr("style", "width: 100px; height: 100px");
+  teamLogo.attr("style", "width: 100%; height: 100%");
   // elem.append(teamLogo);
   return teamLogo;
 
@@ -143,8 +143,12 @@ async function addHints() {
   var homeHints = teamHints[0];
   var awayHints = teamHints[1];
   var venue = teamHints[2];
-  console.log(homeHints);
+  console.log(homeHints.teamPlayers);
   console.log(awayHints);
+
+  for (var i = 0; i < homeHints.teamPlayers.length; i++) {
+    console.log(homeHints.teamPlayers[i]);
+  }
 
   var homePlayersHint = addPlayersToList(homeHints.teamPlayers);
   var awayPlayersHint = addPlayersToList(awayHints.teamPlayers);
@@ -168,8 +172,8 @@ function addPlayersToList(playerArr) {
 
   console.log(playerArr);
 
-  for (var i = 0; i < playerArr.length; i++) {
-    console.log(playerArr[i]);
+  for (var x = 0; x < playerArr.length; x++) {
+    console.log(playerArr[x]);
   }
 
   // playerArr.forEach(function (player) {
