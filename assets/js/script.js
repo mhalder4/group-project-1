@@ -327,24 +327,16 @@ $("#submitAns").on("click", function() {
     else {
       allTeamAbbr = Eastern.concat(Western);
     }
+    allTeamAbbr.sort();
     console.log(allTeamAbbr)
     addTeamLogos();
-  // if (roundCounter === 2) {
-  //   logosIndex = 0;
-  //   allTeamAbbr = [];
-  //   if (homeConf === awayConf) {
-  //     if (homeConf === "Western"){
-  //       allTeamAbbr = Western;
-  //     }
-  //     else {
-  //       allTeamAbbr = Eastern;
-  //     }
-  //   } 
-  //   else {
-  //     allTeamAbbr = Eastern.concat(Western);
-  //   }
-  //   console.log(allTeamAbbr)
-  //   addTeamLogos();
+  if (roundCounter === 2) {
+    logosIndex = 0;
+    allTeamAbbr = [];
+    allTeamAbbr = homeDivi.concat(awayDivi);
+    allTeamAbbr.sort();
+    console.log(allTeamAbbr)
+    addTeamLogos();
 
-  // }
+  }
 }})
