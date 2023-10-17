@@ -111,6 +111,7 @@ function addTeamLogos() {
       </div>`);
       var logosColElem = $(`.logos-col-${i}-${j}`);
       // console.log(`Loop ${i}-${j} complete`);
+      while (logosIndex < allTeamAbbr.length) {
       for (var k = 0; k < 4; k++) {
         var logoElem = pullTeamLogo(allTeamAbbr, logosIndex);
         logosColElem.append(`<div class="logos-box-${i}-${j}-${k}"></div>`);
@@ -120,6 +121,7 @@ function addTeamLogos() {
         // console.log(logosIndex);
         // console.log(`Loop ${i}-${j}-${k} complete`);
       }
+    }
     }
   }
 }
