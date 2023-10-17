@@ -18,10 +18,18 @@ body {
 
 .void {
     padding: 5%;
+    color: black;
+}
+
+.rift {
+    padding: 5%;
+    background-color: black;
+    color: black;
 }
 
 .voided {
     padding: 1%;
+    color: black;
 }
 
 .subTitle {
@@ -35,28 +43,34 @@ body {
 .scoreBoard {
     background-color:aqua;
     padding: 5px;
+    text-indent: 1%;
 }
 
 .First {
     color:black;
+    text-indent: 2%;
 }
 
 .Second {
     color:black;
+    text-indent: 3%;
 }
 
 .Third {
     color:black;
+    text-indent: 4%;
 }
 
 .text {
     color:aqua;
     font-size: larger;
     text-indent: 5%;
+    padding: 1%;
 }
 
 .subText {
     color: aqua;
+    text-indent: 1%;
 }
 
 .rules {
@@ -72,4 +86,64 @@ body {
 .nhlWebsiteBtn {
     position: absolute;
     margin-left: 30%;
+}
+
+.hidden {
+    padding: 1%;
+    background-color: aqua;
+    color: aqua;
+}
+
+.Email {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Facebook {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Snapchat {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Twitter {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Tinder {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.OnlyFans {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.Tik-Tok {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.GYM {
+    text-decoration: none;
+    color: aqua;
+    padding: 1%;
+}
+
+.copyrights {
+    color: aqua;
+    text-align: end;
+    padding: 1%;
 }
