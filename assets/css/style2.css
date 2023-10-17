@@ -12,12 +12,38 @@ main {
     align-items: center;
     background-image: url("");
 }
-
-body {
-    background-image: url("https://th.bing.com/th/id/R.9f24cfab11396c239b06ef9912f84ad7?rik=nhXyyphQiunDlA&riu=http%3a%2f%2fwww.zastavki.com%2fpictures%2foriginals%2f2014%2fSport_Hockey_team_080377_.jpg&ehk=BKNzo%2fxieG3rsYOb6QMyawuHd51i%2ff3roSdIhlirX1Y%3d&risl=&pid=ImgRaw&r=0");
-    
-}
 .title-1{
     color: rgb(203, 203, 227);
     
+}
+.column-all{
+    display: flex;
+
+}
+.my-column{
+    display: flex;
+    flex-basis: 30%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+
+}
+.banner{
+    position: absolute;
+    width: 75%;
+    height: 100px;
+}
+.icon{
+    width: 25%;
+}
+.my-column h2{
+    border: 2px solid black;
+    padding: 20px 50px;
+}
+.my-column .row-1{
+    padding: 20px 70px;
+}
+#column-2-1{
+    color:brown;
 }
