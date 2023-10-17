@@ -121,7 +121,7 @@ function addTeamLogos() {
 function showLogoClicked(code) {
   
     var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
-    bodyElem.append(displayLogo);
+    $("#guessed").append(displayLogo);
   }
 
 
@@ -255,8 +255,6 @@ let count = 0;
 logosMainElem.on("click", ".logo", function () {
   if (count < 2) {
     var logoClicked = this.id;
-    console.log(logoClicked);
-    console.log("Logo clicked.");
     showLogoClicked(logoClicked);
     ansArr.push(this.id);
     count += 1;
@@ -267,7 +265,7 @@ logosMainElem.on("click", ".logo", function () {
 
 $("#submitAns").on("click", function() {
   if (guessedHome === homeAbr && guessedAway === awayAbr) {
-    console.log("You got it!");
+    console.log("✅✅ You got it!");
   }
   else if (guessedHome === homeAbr && guessedAway != awayAbr) {
     console.log("✅❌")
@@ -278,4 +276,7 @@ $("#submitAns").on("click", function() {
   else {
     console.log("❌❌");
   }
+  ansArr = [];
+  count = 0;
+  $("#guessed").empty();
 })
