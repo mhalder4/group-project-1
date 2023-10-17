@@ -7,6 +7,8 @@ var gameID;
 var homeTeam;
 var awayTeam;
 
+var numOfGuesses = 0;
+
 const metropolitan = ["CAR", "CBJ", "NJD", "NYI", "NYR", "PHI", "PIT", "WSH"];
 const atlantic = ["BOS", "BUF", "DET", "FLA", "MTL", "OTT", "TBL", "TOR"];
 const central = ["ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL", "WPG"];
@@ -90,7 +92,7 @@ function pullTeamLogo(abbrArray, index) {
 
 function addTeamLogos() {
   var logosElem = $(".logos");
-  
+
 
   var logosIndex = 0;
 
@@ -98,13 +100,13 @@ function addTeamLogos() {
     logosElem.append(`
     <div class="row team-logo-row-${i}" style="display:flex; flex-wrap: wrap">
     </div>`);
-    console.log(`Loop ${i} complete`);
+    // console.log(`Loop ${i} complete`);
     var logosRowElem = $(`.team-logo-row-${i}`);
     for (var j = 0; j < 2; j++) {
       logosRowElem.append(`<div class="d-flex col-6 logos-col-${i}-${j}">
       </div>`);
       var logosColElem = $(`.logos-col-${i}-${j}`);
-      console.log(`Loop ${i}-${j} complete`);
+      // console.log(`Loop ${i}-${j} complete`);
       for (var k = 0; k < 4; k++) {
         var logoElem = pullTeamLogo(allTeamAbbr, logosIndex);
         logosColElem.append(`<div class="logos-box-${i}-${j}-${k}"></div>`);
@@ -112,21 +114,74 @@ function addTeamLogos() {
         logoBoxElem.append(logoElem);
         logosIndex++;
         console.log(logosIndex);
-        console.log(`Loop ${i}-${j}-${k} complete`);
+        // console.log(`Loop ${i}-${j}-${k} complete`);
       }
     }
   }
 }
 
 function showLogoClicked(code) {
-  
-    var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
-    bodyElem.append(displayLogo);
+
+  var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
+  bodyElem.append(displayLogo);
+}
+
+async function addHints() {
+  const homeScoreHintElem = $(`#column-2-2`);
+  const awayScoreHintElem = $(`#column-3-2`);
+  const homeConfHintElem = $(`#column-2-3`);
+  const awayConfHintElem = $(`#column-3-3`);
+  const homeDivHintElem = $(`#column-2-4`);
+  const awayDivHintElem = $(`#column-3-4`);
+  const homePlayersHintElem = $(`#column-2-5`);
+  const awayPlayersHintElem = $(`#column-3-5`);
+  const venueHintElem = $(`#column-2-6`);
+
+  // console.log(homeTeam);
+
+  var teamHints = await teamPromise;
+  var homeHints = teamHints[0];
+  var awayHints = teamHints[1];
+  var venue = teamHints[2];
+  console.log(homeHints);
+  console.log(awayHints);
+
+  var homePlayersHint = addPlayersToList(homeHints.teamPlayers);
+  var awayPlayersHint = addPlayersToList(awayHints.teamPlayers);
+
+
+
+  homeScoreHintElem.text(homeHints.teamScore);
+  awayScoreHintElem.text(awayHints.teamScore);
+  homeConfHintElem.text(homeHints.conference);
+  awayConfHintElem.text(awayHints.conference);
+  homeDivHintElem.text(homeHints.division);
+  awayDivHintElem.text(awayHints.division);
+  homePlayersHintElem.append(homePlayersHint);
+  awayPlayersHintElem.append(awayPlayersHint);
+  venueHintElem.text(venue);
+}
+
+function addPlayersToList(playerArr) {
+  var playerListElem = $("<ul>");
+  playerListElem.text("Players");
+
+  console.log(playerArr);
+
+  for (var i = 0; i < playerArr.length; i++) {
+    console.log(playerArr[i]);
   }
 
+  // playerArr.forEach(function (player) {
+  //   console.log(player);
+  //   const playerItem = $("<li>");
+  //   playerItem.text(player);
+  //   playerListElem.append(playerItem);
+  // })
 
+  return playerListElem;
 
-
+}
 
 
 
@@ -150,7 +205,7 @@ var awayConf;
 var awayDivi;
 var awayScore;
 
-fetch(gameURL)
+var teamPromise = fetch(gameURL)
   .then(function (response) {
     return response.json();
   })
@@ -239,11 +294,24 @@ fetch(gameURL)
     console.log(awayTeam);
     console.log(homeTeam);
 
+    var gameInfo = [homeTeam, awayTeam, venue];
+    return gameInfo;
+
   })
 
 // pullTeamLogo(atlantic, metropolitan, central, pacific, "first");
 
 addTeamLogos();
+addHints();
+// console.log(teamPromise);
+// console.log(teamArr[0].teamName);
+
+async function asyncTest() {
+  console.log("Test Started");
+  const result = await teamPromise;
+  console.log(result[0]);
+}
+
 
 console.log(atlantic.concat(metropolitan, central, pacific));
 
@@ -253,19 +321,21 @@ var guessedAway;
 var ansArr = [];
 let count = 0;
 logosMainElem.on("click", ".logo", function () {
-  if (count < 2) {
-    var logoClicked = this.id;
-    console.log(logoClicked);
-    console.log("Logo clicked.");
-    showLogoClicked(logoClicked);
-    ansArr.push(this.id);
-    count += 1;
-  } 
+  if (numOfGuesses < 5) {
+    if (count < 2) {
+      var logoClicked = this.id;
+      console.log(logoClicked);
+      console.log("Logo clicked.");
+      showLogoClicked(logoClicked);
+      ansArr.push(this.id);
+      count += 1;
+    }
+  }
   guessedHome = ansArr[0];
   guessedAway = ansArr[1];
 });
 
-$("#submitAns").on("click", function() {
+$("#submitAns").on("click", function () {
   if (guessedHome === homeAbr && guessedAway === awayAbr) {
     console.log("You got it!");
   }
@@ -278,4 +348,7 @@ $("#submitAns").on("click", function() {
   else {
     console.log("❌❌");
   }
+
+  numOfGuesses++;
+  count = 0;
 })
