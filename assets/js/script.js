@@ -7,13 +7,15 @@ var gameID;
 var homeTeam;
 var awayTeam;
 
+var roundCounter = 0;
+
 const metropolitan = ["CAR", "CBJ", "NJD", "NYI", "NYR", "PHI", "PIT", "WSH"];
 const atlantic = ["BOS", "BUF", "DET", "FLA", "MTL", "OTT", "TBL", "TOR"];
 const central = ["ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL", "WPG"];
 const pacific = ["ANA", "CGY", "EDM", "LAK", "SJS", "SEA", "VAN", "VGK"];
 
-const eastern = ["metropolitan", "atlantic"];
-const western = ["central", "pacific"];
+const Eastern = metropolitan.concat(atlantic);
+const Western = central.concat(pacific);
 
 function Team(isHome, name, abbr, score, conf, divi, players) {
   this.isTeamHome = isHome;
@@ -56,7 +58,11 @@ function concatArrays(arr1, arr2, arr3, arr4) {
   return arr;
 }
 
-const allTeamAbbr = concatArrays(atlantic, metropolitan, central, pacific);
+var allTeamAbbr = [];
+
+allTeamAbbr = Eastern.concat(Western);
+allTeamAbbr.sort();
+  
 
 function pullTeamLogo(abbrArray, index) {
 
@@ -98,21 +104,21 @@ function addTeamLogos() {
     logosElem.append(`
     <div class="row team-logo-row-${i}" style="display:flex; flex-wrap: wrap">
     </div>`);
-    console.log(`Loop ${i} complete`);
+    // console.log(`Loop ${i} complete`);
     var logosRowElem = $(`.team-logo-row-${i}`);
     for (var j = 0; j < 2; j++) {
       logosRowElem.append(`<div class="d-flex col-6 logos-col-${i}-${j}">
       </div>`);
       var logosColElem = $(`.logos-col-${i}-${j}`);
-      console.log(`Loop ${i}-${j} complete`);
+      // console.log(`Loop ${i}-${j} complete`);
       for (var k = 0; k < 4; k++) {
         var logoElem = pullTeamLogo(allTeamAbbr, logosIndex);
         logosColElem.append(`<div class="logos-box-${i}-${j}-${k}"></div>`);
         var logoBoxElem = $(`.logos-box-${i}-${j}-${k}`);
         logoBoxElem.append(logoElem);
         logosIndex++;
-        console.log(logosIndex);
-        console.log(`Loop ${i}-${j}-${k} complete`);
+        // console.log(logosIndex);
+        // console.log(`Loop ${i}-${j}-${k} complete`);
       }
     }
   }
@@ -121,7 +127,7 @@ function addTeamLogos() {
 function showLogoClicked(code) {
   
     var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
-    bodyElem.append(displayLogo);
+    $("#guessed").append(displayLogo);
   }
 
 
@@ -255,8 +261,6 @@ let count = 0;
 logosMainElem.on("click", ".logo", function () {
   if (count < 2) {
     var logoClicked = this.id;
-    console.log(logoClicked);
-    console.log("Logo clicked.");
     showLogoClicked(logoClicked);
     ansArr.push(this.id);
     count += 1;
@@ -265,17 +269,60 @@ logosMainElem.on("click", ".logo", function () {
   guessedAway = ansArr[1];
 });
 
-$("#submitAns").on("click", function() {
-  if (guessedHome === homeAbr && guessedAway === awayAbr) {
-    console.log("You got it!");
+var checks = [];
+var yes = "✅";
+var maybe = "❎";
+var no = "❌";
+
+function checkAnswers() {
+  checks = [];
+  if (ansArr[0] === homeAbr) {
+    checks.push(yes);
   }
-  else if (guessedHome === homeAbr && guessedAway != awayAbr) {
-    console.log("✅❌")
-  }
-  else if (guessedHome != homeAbr && guessedAway === awayAbr) {
-    console.log("❌✅")
+  else if (ansArr[0] === awayAbr) {
+    checks.push(maybe);
   }
   else {
-    console.log("❌❌");
+    checks.push(no);
   }
+  if (ansArr[1] === awayAbr) {
+    checks.push(yes);
+  }
+  else if (ansArr[1] === homeAbr) {
+    checks.push(maybe);
+  }
+  else {
+    checks.push(no);
+  }
+  ansArr = [];
+  $("#guessed").empty();
+  checks = checks.toString();
+  checks = checks.replace(",", " ");
+}
+
+$("#submitAns").on("click", function() {
+  checkAnswers();
+  count = 0;
+  roundCounter++;
+  console.log(checks);
+  console.log(window[homeConf])
+  // if (roundCounter === 1) {
+  //   logosIndex = 0;
+  //   allTeamAbbr = [];
+  //   if (homeConf === awayConf) {
+  //     if (homeConf === "Western"){
+  //       allTeamAbbr = Western;
+  //     }
+  //     else {
+  //       allTeamAbbr = Eastern;
+  //     }
+  //   } 
+  //   else {
+  //     allTeamAbbr = Eastern.concat(Western);
+  //   }
+  //   $(".team-logos").empty();
+  //   console.log(allTeamAbbr)
+  //   addTeamLogos();
+
+  // }
 })
