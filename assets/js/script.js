@@ -71,7 +71,7 @@ function pullTeamLogo(abbrArray, index) {
   teamLogo.attr("src", logoURL);
   teamLogo.attr("class", "logo");
   teamLogo.attr("id", abbrArray[index]);
-  teamLogo.attr("style", "width: 100%; height: 100%");
+  teamLogo.attr("style", "width: 100px; height: 100px");
   // elem.append(teamLogo);
   return teamLogo;
 
@@ -128,6 +128,9 @@ function showLogoClicked(code) {
 
   var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
   bodyElem.append(displayLogo);
+
+  // var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
+  // $("#guessed").append(displayLogo);
 }
 
 async function addHints() {
