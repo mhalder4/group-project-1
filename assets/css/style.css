@@ -58,6 +58,8 @@ body {
 .subText {
     background-color: black;
     color: aqua;
+    background-color:aqua;
+    color: black;
 }
 
 .rules {
@@ -96,6 +98,7 @@ body {
 .modal.active {
     transform: translate(-50%, -50%) scale(1); 
 }
+
 .modal-header {
     padding: 10px 15px;
     display: flex;
