@@ -143,20 +143,20 @@ async function addHints() {
 
   // console.log(homeTeam);
 
-  var teamHints = await teamPromise;
+  var teamHints = await teamPromise();
   var homeHints = teamHints[0];
   var awayHints = teamHints[1];
   var venue = teamHints[2];
-  console.log(homeHints.teamPlayers);
-  console.log(awayHints);
+  console.log(homeHints.teamPlayers)
+  console.log(awayHints.teamPlayers)
 
   for (var i = 0; i < homeHints.teamPlayers.length; i++) {
     console.log(homeHints.teamPlayers[i]);
 
   }
 
-  var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
-  $("#guessed").append(displayLogo);
+  // var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
+  // $("#guessed").append(displayLogo);
 
   var homePlayersHint = addPlayersToList(homeHints.teamPlayers);
   var awayPlayersHint = addPlayersToList(awayHints.teamPlayers);
@@ -176,20 +176,21 @@ async function addHints() {
 
 function addPlayersToList(playerArr) {
   var playerListElem = $("<ul>");
-  playerListElem.text("Players");
+  playerListElem.attr("style", "list-style-type: none");
+  // playerListElem.text("Players");
 
   console.log(playerArr);
 
-  for (var x = 0; x < playerArr.length; x++) {
-    console.log(playerArr[x]);
-  }
+  // for (var x = 0; x < playerArr.length; x++) {
+  //   console.log(playerArr[x]);
+  // }
 
-  // playerArr.forEach(function (player) {
-  //   console.log(player);
-  //   const playerItem = $("<li>");
-  //   playerItem.text(player);
-  //   playerListElem.append(playerItem);
-  // })
+  playerArr.forEach(function (player) {
+    console.log(player);
+    const playerItem = $("<li>");
+    playerItem.text(player);
+    playerListElem.append(playerItem);
+  })
 
   return playerListElem;
 
@@ -217,70 +218,69 @@ var awayConf;
 var awayDivi;
 var awayScore;
 
-var teamPromise = fetch(gameURL)
+var teamPromise = () => fetch(gameURL)
   .then(function (response) {
     return response.json();
   })
-  .then(function (data) {
-    console.log(data);
-    console.log(dayjs(data.gameData.datetime.dateTime).format("MMM DD, YYYY"))
-    console.log(data.gameData.teams.home.name);
-    console.log(data.gameData.teams.home.abbreviation);
-    console.log(data.gameData.teams.home.conference.name);
-    console.log(data.gameData.teams.home.division.name);
-    console.log(data.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals);
+  .then(async function (data) {
+    // console.log(data);
+    // console.log(dayjs(data.gameData.datetime.dateTime).format("MMM DD, YYYY"))
+    // console.log(data.gameData.teams.home.name);
+    // console.log(data.gameData.teams.home.abbreviation);
+    // console.log(data.gameData.teams.home.conference.name);
+    // console.log(data.gameData.teams.home.division.name);
+    // console.log(data.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals);
 
     homeName = (data.gameData.teams.home.name);
     homeAbr = (data.gameData.teams.home.abbreviation);
     homeConf = (data.gameData.teams.home.conference.name);
     homeDivi = (data.gameData.teams.home.division.name);
     homeScore = (data.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals);
-    var homePlayers = [];
+
 
 
     var homePeople = data.liveData.boxscore.teams.home.onIce;
-    homePeople.forEach(function (item) {
-      fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          // console.log(data);
-          let playerName = data.people[0].fullName;
-          let playerNumber = data.people[0].primaryNumber;
-          console.log(`${playerNumber} ${playerName}`);
-          homePlayers.push(`${playerNumber} ${playerName}`);
-        })
-    })
+    let homePlayers = await Promise.all(homePeople.map(async function (item) {
+      let response = await fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
+
+      let data = await response.json();
+
+      // console.log(data);
+      let playerName = data.people[0].fullName;
+      let playerNumber = data.people[0].primaryNumber;
+      console.log(`${playerNumber} ${playerName}`);
+
+      return `${playerNumber} ${playerName}`
+    }))
+
 
     homeTeam = new Team(true, homeName, homeAbr, homeScore, homeConf, homeDivi, homePlayers);
 
-    console.log(data.gameData.teams.away.name);
-    console.log(data.gameData.teams.away.conference.name);
-    console.log(data.gameData.teams.away.division.name);
-    console.log(data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
+    // console.log(data.gameData.teams.away.name);
+    // console.log(data.gameData.teams.away.conference.name);
+    // console.log(data.gameData.teams.away.division.name);
+    // console.log(data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
 
     awayName = (data.gameData.teams.away.name);
     awayAbr = (data.gameData.teams.away.abbreviation);
     awayConf = (data.gameData.teams.away.conference.name);
     awayDivi = (data.gameData.teams.away.division.name);
     awayScore = (data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
-    var awayPlayers = [];
+
 
     var awayPeople = data.liveData.boxscore.teams.away.onIce;
-    awayPeople.forEach(function (item) {
-      fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          // console.log(data);
-          let playerName = data.people[0].fullName;
-          let playerNumber = data.people[0].primaryNumber;
-          console.log(`${playerNumber} ${playerName}`);
-          awayPlayers.push(`${playerNumber} ${playerName}`);
-        })
-    })
+    let awayPlayers = await Promise.all(awayPeople.map(async function (item) {
+      let response = await fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
+
+      let data = await response.json();
+
+      // console.log(data);
+      let playerName = data.people[0].fullName;
+      let playerNumber = data.people[0].primaryNumber;
+      console.log(`${playerNumber} ${playerName}`);
+      return `${playerNumber} ${playerName}`
+
+    }))
 
     $("#scoreBox").text(`${homeScore}(H) : ${awayScore}(A)`)
     awayTeam = new Team(false, awayName, awayAbr, awayScore, awayConf, awayDivi, awayPlayers)
