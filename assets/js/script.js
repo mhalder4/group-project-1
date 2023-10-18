@@ -1,6 +1,7 @@
 const bodyElem = $("body");
 const logosMainElem = $(".team-logos");
 const timerElem = $("#timer-display");
+const gameBtnsElem = $(".gameplay-btns");
 
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
@@ -35,8 +36,29 @@ function Team(isHome, name, abbr, score, conf, divi, players) {
   this.teamPlayers = players;
 };
 
+function Player(name, score, time) {
+  this.name = name;
+  this.score = score;
+  this.time = time;
+};
+
 var highscores = [];
 
+// var exPlayer1 = new Player("P One", 1, 100);
+// var exPlayer2 = new Player("P Two", 1, 500);
+// var exPlayer3 = new Player("P Three", 1, 100);
+// var exPlayer4 = new Player("P Four", 1, 450);
+// var exPlayer5 = new Player("P Five", 1, 250);
+// var exPlayer6 = new Player("P Six", 2, 10);
+
+// highscores.push(exPlayer1);
+// highscores.push(exPlayer2);
+// highscores.push(exPlayer3);
+// highscores.push(exPlayer4);
+// highscores.push(exPlayer5);
+// highscores.push(exPlayer6);
+
+// manageHighScores(highscores);
 
 
 // The ID of the game. The first 4 digits identify the season of the game (ie. 2017 for the 2017-2018 season). The next 2 digits give the type of game, where 01 = preseason, 02 = regular season, 03 = playoffs, 04 = all-star. The final 4 digits identify the specific game number. For regular season and preseason games, this ranges from 0001 to the number of games played. (1271 for seasons with 31 teams (2017 and onwards) and 1230 for seasons with 30 teams). For playoff games, the 2nd digit of the specific number gives the round of the playoffs, the 3rd digit specifies the matchup, and the 4th digit specifies the game (out of 7).
@@ -51,11 +73,35 @@ function loadLocalStorage() {
       highscores.push(object);
     });
   }
+  manageHighScores(highscores);
 }
 
 // Updates local storage
 function updateLocalStorage() {
   localStorage.setItem("highscores", JSON.stringify(highscores));
+  manageHighScores(highscores);
+}
+
+function manageHighScores(arr) {
+  console.log(arr);
+
+  arr.sort(function (a, b) {
+    var scoreDiff = a.score - b.score; //If a.score is less will be negative
+    var timeDiff = a.time - b.time; // If a.time is less will be negative
+
+    if (scoreDiff == 0) {
+      return timeDiff;
+    } else {
+      return scoreDiff;
+    }
+  });
+
+  if (arr.length > 5) {
+    arr = arr.slice(0, 5);
+  }
+
+  console.log(arr);
+  return arr;
 }
 
 function generateRandomNumber(min, max) {
@@ -70,7 +116,7 @@ function startTimer() {
 
     timerElem.text(timerSec);
 
-    if (timerSec === 600) {
+    if (timerSec === 600 || roundCounter === 5 || (isHomeCorrect && isAwayCorrect)) {
       clearInterval(timeInterval);
     }
 
@@ -96,6 +142,8 @@ function randomizeGameId() {
   console.log(gameID);
   return gameID;
 }
+
+randomizeGameId();
 
 var allTeamAbbr = [];
 
@@ -275,38 +323,29 @@ function pullFiveRandomItems(arr) {
 }
 
 
-
-
-
-// overlay.addEventListener('click', () => {
-//   const modals = document.querySelectorAll('.modal.active')
-//   modals.forEach(modal => {
-//     closeModal(modal)
-//   })
-// })
-
-// closeModalButtons.forEach(button => {
-//   button.addEventListener('click', () => {
-//     const modal = button.closest('.modal')
-//     closeModal(modal)
-//   })
-// })
-
-// function openModal(modal) {
-//   if (modal == null) return
-//   modal.classList.add('active')
-//   overlay.classList.add('active')
-// }
-
-// function closeModal(modal){
-//   if (modal == null) return
-//   modal.classList.add('active')
-//   overlay.classList.add('active')
-// }
+function checkGameOver() {
+  if (roundCounter === 5 || (isHomeCorrect && isAwayCorrect)) {
+    gameBtnsElem.append(`
+      <form class="score-submit">
+        <h2>You scored ${roundCounter} with a time of ${timerSec} seconds</h2>
+        <h3>Add your name below</h3>
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control-first" placeholder="First name">
+          </div>
+          <div class="col">
+              <input type="text" class="form-control-last" placeholder="Last name">
+          </div>
+          <button type="button" class="btn btn-success btn-save">Save score</button>
+        </div>
+        
+      </form>`);
+  }
+}
 
 // function store
 
-randomizeGameId();
+
 
 gameURL += gameID + "/feed/live";
 
@@ -357,7 +396,7 @@ var teamPromise = () => fetch(gameURL)
       // console.log(data);
       let playerName = data.people[0].fullName;
       let playerNumber = data.people[0].primaryNumber;
-      console.log(`${playerNumber} ${playerName}`);
+      // console.log(`${playerNumber} ${playerName}`);
 
       return `${playerNumber} ${playerName}`
     }))
@@ -388,7 +427,7 @@ var teamPromise = () => fetch(gameURL)
       // console.log(data);
       let playerName = data.people[0].fullName;
       let playerNumber = data.people[0].primaryNumber;
-      console.log(`${playerNumber} ${playerName}`);
+      // console.log(`${playerNumber} ${playerName}`);
       return `${playerNumber} ${playerName}`
 
     }))
@@ -429,7 +468,7 @@ var teamPromise = () => fetch(gameURL)
 
   })
 
-
+loadLocalStorage();
 addTeamLogos();
 addHints();
 startTimer();
@@ -458,10 +497,14 @@ var yes = "✅";
 var maybe = "❎";
 var no = "❌";
 
+var isHomeCorrect = false;
+var isAwayCorrect = false;
+
 function checkAnswers() {
   checks = [];
   if (ansArr[0] === homeAbr) {
     checks.push(ansArr[0] + yes);
+    isHomeCorrect = true;
   }
   else if (ansArr[0] === awayAbr) {
     checks.push(ansArr[0] + maybe);
@@ -471,6 +514,7 @@ function checkAnswers() {
   }
   if (ansArr[1] === awayAbr) {
     checks.push(ansArr[1] + yes);
+    isAwayCorrect = true;
   }
   else if (ansArr[1] === homeAbr) {
     checks.push(ansArr[1] + maybe);
@@ -551,5 +595,31 @@ $("#submitAns").on("click", function () {
     $("#guess5").text(checks);
   }
 
+  checkGameOver();
 }
 )
+
+
+gameBtnsElem.on("click", ".btn-save", function () {
+  const firstName = $(".form-control-first").val();
+  const lastName = $(".form-control-last").val();
+  const formElem = $(".score-submit");
+
+
+
+  if (firstName === "" || lastName === "") {
+    formElem.append(`<p>Please add a first and last name.</p>`);
+  } else {
+    var name = firstName + " " + lastName;
+
+    console.log(firstName);
+    console.log(lastName);
+    console.log("Save clicked");
+
+    var player = new Player(name, roundCounter, timerSec);
+    highscores.push(player);
+    updateLocalStorage();
+    formElem.remove();
+  }
+
+})
