@@ -347,18 +347,8 @@ var teamPromise = () => fetch(gameURL)
     console.log(venue);
     let venueLink = venue.replaceAll(" ", "+");
     // ADBLOCKER MUST BE DISABLED FOR THIS TO WORK
-    $("#googleMap").append(`
-    <iframe
-      style="display: show"
-      width="300"
-      height="350"
-      style="border:0"
-      loading="lazy"
-      allowfullscreen
-      referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDTxotnfke5TbqtSkPZSB4OkoPgi-cgYsc
-        &q=${venueLink}">
-  </iframe>`)
+    $("#googleMap").attr(`src`, `https://www.google.com/maps/embed/v1/place?key=AIzaSyDTxotnfke5TbqtSkPZSB4OkoPgi-cgYsc
+        &q=${venueLink}`)
 
     console.log(awayTeam);
     console.log(homeTeam);

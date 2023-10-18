@@ -5,11 +5,16 @@
     padding: 150px;
     margin: 50px;
 }
+
+
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-image: url("");
+}
+.titles {
+    border-bottom:solid black 2px;
 }
 .title-1{
     color: rgb(203, 203, 227);
@@ -58,6 +63,12 @@ main {
     border-radius: 10px;
 }
 
+#googleMap {
+    width:300px;
+    height:350px;
+    border:0;
+}
+
 button {
     width:50%;
 }
@@ -67,4 +78,10 @@ footer {
     text-align:center;
     bottom: 0px;
     width: auto;
+}
+
+@media screen and (max-width: 415px){
+    h3 { 
+        font-size: 1.1rem;
+    }
 }
