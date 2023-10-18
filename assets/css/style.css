@@ -22,8 +22,8 @@ body {
 }
 
 .rift {
-    padding: 5%;
-    background-color: black;
+    padding: 1%;
+    background-color: aqua;
     color: black;
 }
 
@@ -73,11 +73,12 @@ body {
     color: aqua;
     background-color:aqua;
     color: black;
+    text-indent: 1%;
 }
 
 .rules {
     color: aqua;
-    text-indent: 1%;
+    text-indent: 2%;
     font-size: larger;
 }
 

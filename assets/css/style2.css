@@ -33,6 +33,7 @@ main {
 }
 .banner{
     position: absolute;
+<<<<<<< HEAD
     width: 15%;
     
     
@@ -41,6 +42,13 @@ main {
     width: 5%;
 
 
+=======
+    width: 75%;
+    height: 100px;
+}
+.icon{
+    width: 5%;
+>>>>>>> origin
 }
 .my-column h2{
     border: 2px solid black;
@@ -51,4 +59,15 @@ main {
 }
 #column-2-1{
     color:brown;
+}
+
+.gameInfo {
+    border-bottom: solid black 3px;
+}
+
+footer {
+    text-align:center;
+     position: fixed;
+     bottom: 0px;
+     width: auto;
 }
