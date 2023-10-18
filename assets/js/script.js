@@ -454,12 +454,12 @@ $("#submitAns").on("click", function () {
         }
       }
     }
-    
-    
+
+
     allTeamAbbr.sort();
     console.log(allTeamAbbr)
     addTeamLogos();
   }
 
-  }
-  )
+}
+)
