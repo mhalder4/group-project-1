@@ -145,15 +145,15 @@ function showLogoClicked(code) {
 
 
 async function addHints() {
-  const homeScoreHintElem = $(`#column-2-2`);
-  const awayScoreHintElem = $(`#column-3-2`);
-  const homeConfHintElem = $(`#column-2-3`);
-  const awayConfHintElem = $(`#column-3-3`);
-  const homeDivHintElem = $(`#column-2-4`);
-  const awayDivHintElem = $(`#column-3-4`);
-  const homePlayersHintElem = $(`#column-2-5`);
-  const awayPlayersHintElem = $(`#column-3-5`);
-  const venueHintElem = $(`#column-2-6`);
+  const homeScoreHintElem = $(`#homeScore`);
+  const awayScoreHintElem = $(`#awayScore`);
+  const homeConfHintElem = $(`#homeConf`);
+  const awayConfHintElem = $(`#awayConf`);
+  const homeDivHintElem = $(`#homeDivi`);
+  const awayDivHintElem = $(`#awayDivi`);
+  const homePlayersHintElem = $(`#homePlayers`);
+  const awayPlayersHintElem = $(`#awayPlayers`);
+  const venueHintElem = $(`#venue`);
 
 
   // console.log(homeTeam);
@@ -337,14 +337,21 @@ var teamPromise = () => fetch(gameURL)
 
     // venue the game took place at
     let venue = (data.gameData.venue.name);
+    if (venue === "BB&T Center") {
+      venue = "Amerant Bank Arena";
+    }
+    if (venue === "Pepsi Center") {
+      venue = "Ball Arena";
+    }
+
     console.log(venue);
     let venueLink = venue.replaceAll(" ", "+");
     // ADBLOCKER MUST BE DISABLED FOR THIS TO WORK
-    $("#column-3-6").append(`
+    $("#googleMap").append(`
     <iframe
       style="display: show"
-      width="500"
-      height="300"
+      width="300"
+      height="350"
       style="border:0"
       loading="lazy"
       allowfullscreen
@@ -420,12 +427,22 @@ function checkAnswers() {
   checks = checks.replace(",", " ");
 }
 
+$("#clearAns").on("click", function() {
+  $("#guessed").empty();
+  guessedHome = "";
+  guessedAway = "";
+  ansArr = [];
+  count = 0;
+})
+
 $("#submitAns").on("click", function () {
   checkAnswers();
   count = 0;
-  roundCounter++;
   console.log(checks);
+  roundCounter++;
   if (roundCounter === 1) {
+    $(".conference").attr("style", "display:show");
+    $("#guess1").text(checks);
     logosIndex = 0;
     allTeamAbbr = [];
     if (homeConf === awayConf) {
@@ -444,6 +461,8 @@ $("#submitAns").on("click", function () {
     addTeamLogos();
   }
   if (roundCounter === 2) {
+    $(".division").attr("style", "display:show");
+    $("#guess2").text(checks);
     logosIndex = 0;
     allTeamAbbr = [];
     for (var i = 0; i < divisions.length; i++) {
@@ -458,12 +477,21 @@ $("#submitAns").on("click", function () {
         }
       }
     }
-    
-    
     allTeamAbbr.sort();
     console.log(allTeamAbbr)
     addTeamLogos();
   }
-
+  if (roundCounter === 3) {
+    $(".players").attr("style", "display:show");
+    $("#guess3").text(checks);
+  }
+  if (roundCounter === 4) {
+    $(".location").attr("style", "display:show");
+    $("#guess4").text(checks);
+  }
+  if (roundCounter === 5) {
+    $("#guess5").text(checks);
+  }
+  
   }
   )
