@@ -33,11 +33,14 @@ main {
 }
 .banner{
     position: absolute;
-    width: 75%;
+    width: 15%;
+    
     
 }
 .icon{
-    width: 25%;
+    width: 5%;
+
+
 }
 .my-column h2{
     border: 2px solid black;
