@@ -5,9 +5,6 @@ const gameBtnsElem = $(".gameplay-btns");
 
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
-/* const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay') */
 
 var homeTeam;
 var awayTeam;
@@ -102,6 +99,22 @@ function manageHighScores(arr) {
 
   console.log(arr);
   return arr;
+}
+
+function addHighScores() {
+  highscores.forEach(function (player) {
+    console.log(player.score);
+  })
+
+  for (var i = 0; i < highscores.length; i++) {
+    const nameElem = $(`.${i + 1}-fullname`);
+    const scoreElem = $(`.${i + 1}-score`);
+    const timeElem = $(`.${i + 1}-time`);
+
+    nameElem.text(highscores[i].name);
+    scoreElem.text(highscores[i].score);
+    timeElem.text(highscores[i].time);
+  }
 }
 
 function generateRandomNumber(min, max) {
@@ -447,18 +460,8 @@ var teamPromise = () => fetch(gameURL)
     console.log(venue);
     let venueLink = venue.replaceAll(" ", "+");
     // ADBLOCKER MUST BE DISABLED FOR THIS TO WORK
-    $("#googleMap").append(`
-    <iframe
-      style="display: show"
-      width="300"
-      height="350"
-      style="border:0"
-      loading="lazy"
-      allowfullscreen
-      referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDTxotnfke5TbqtSkPZSB4OkoPgi-cgYsc
-        &q=${venueLink}">
-  </iframe>`)
+    $("#googleMap").attr(`src`, `https://www.google.com/maps/embed/v1/place?key=AIzaSyDTxotnfke5TbqtSkPZSB4OkoPgi-cgYsc
+        &q=${venueLink}`)
 
     console.log(awayTeam);
     console.log(homeTeam);
@@ -469,6 +472,7 @@ var teamPromise = () => fetch(gameURL)
   })
 
 loadLocalStorage();
+addHighScores();
 addTeamLogos();
 addHints();
 startTimer();
@@ -593,6 +597,7 @@ $("#submitAns").on("click", function () {
   }
   if (roundCounter === 5) {
     $("#guess5").text(checks);
+    $(".buttons").attr("style", "display:none");
   }
 
   checkGameOver();

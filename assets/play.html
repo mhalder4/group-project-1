@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" href="./assets/images/MSTY.png">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <a href="../index.html">
             <img src="./images/MSTTY.png" alt="ForGuy's MSTTY" class="icon">
@@ -30,47 +30,68 @@
     </div>
 
     <div id="gameInfo">
-        <div class="row titles justify-content-evenly">
-            <h3 class="col-3">Hints</h3>
-            <h3 class="col-3">Home Team</h3>
-            <h3 class="col-3">Away Team</h3>
-            <h3 class="col-3">Guesses</h3>
+        <div class="row">
+            <div class="row titles justify-content-evenly">
+                <h3 class="col-3 row justify-content-center">Hints</h3>
+                <h3 class="col-3 row justify-content-center">Home Team</h3>
+                <h3 class="col-3 row justify-content-center">Away Team</h3>
+                <h3 class="col-3 row justify-content-center">Guesses</h3>
 
+            </div>
         </div>
-        <div class="row scores justify-content-evenly">
-            <h3 class="col-3">Scores</h3>
-            <h3 class="col-3" id="homeScore"></h3>
-            <h3 class="col-3" id="awayScore"></h3>
-            <h3 class="col-3" id="guess1"></h3>
 
+        <div class="row">
+            <div class="row scores justify-content-evenly">
+                <h3 class="col-3 row justify-content-center">Scores</h3>
+                <h3 class="col-3 row justify-content-center" id="homeScore"></h3>
+                <h3 class="col-3 row justify-content-center" id="awayScore"></h3>
+                <h3 class="col-3 row justify-content-center" id="guess1"></h3>
+
+            </div>
         </div>
-        <div class="row conference justify-content-evenly" style="display:none">
-            <h3 class="col-3">Conference</h3>
-            <h3 class="col-3" id="homeConf"></h3>
-            <h3 class="col-3" id="awayConf"></h3>
-            <h3 class="col-3" id="guess2"></h3>
 
+        <div class="row">
+            <div class="row conference justify-content-evenly" style="display:none">
+                <h3 class="col-3 row justify-content-center" id="conference">Conference</h3>
+                <h3 class="col-3 row justify-content-center" id="homeConf"></h3>
+                <h3 class="col-3 row justify-content-center" id="awayConf"></h3>
+                <h3 class="col-3 row justify-content-center" id="guess2"></h3>
+
+            </div>
         </div>
-        <div class="row division justify-content-evenly" style="display:none">
-            <h3 class="col-3">Division</h3>
-            <h3 class="col-3" id="homeDivi"></h3>
-            <h3 class="col-3" id="awayDivi"></h3>
-            <h3 class="col-3" id="guess3"></h3>
 
+        <div class="row">
+            <div class="row division justify-content-evenly" style="display:none">
+                <h3 class="col-3 row justify-content-center">Division</h3>
+                <h3 class="col-3 row justify-content-center" id="homeDivi"></h3>
+                <h3 class="col-3 row justify-content-center" id="awayDivi"></h3>
+                <h3 class="col-3 row justify-content-center" id="guess3"></h3>
+
+            </div>
         </div>
-        <div class="row players justify-content-evenly" style="display:none">
-            <h3 class="col-3">Players</h3>
-            <h3 class="col-3" id="homePlayers"></h3>
-            <h3 class="col-3" id="awayPlayers"></h3>
-            <h3 class="col-3" id="guess4"></h3>
 
+        <div class="row">
+            <div class="row players justify-content-evenly" style="display:none">
+                <h3 class="col-3 row justify-content-center">Players</h3>
+                <h3 class="col-3 row justify-content-center" id="homePlayers"></h3>
+                <h3 class="col-3 row justify-content-center" id="awayPlayers"></h3>
+                <h3 class="col-3 row justify-content-center" id="guess4"></h3>
+
+            </div>
         </div>
-        <div class="row location justify-content-evenly" style="display:none">
-            <h3 class="col-3">Location</h3>
-            <h3 class="col-3" id="venue">Bell Arena</h3>
-            <h3 class="col-3" id="googleMap"></h3>
-            <h3 class="col-3" id="guess5"></h3>
 
+        <div class="row">
+            <div class="row location justify-content-evenly" style="display:none">
+                <h3 class="col-3 row justify-content-center">Location</h3>
+                <h3 class="col-3 row justify-content-center" id="venue"></h3>
+                <h3 class="col-3 row justify-content-center">
+                    <iframe id="googleMap" width="300" height="350" style="border:0" loading="lazy" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade" src="">
+                    </iframe>
+                </h3>
+                <h3 class="col-3 row justify-content-center" id="guess5"></h3>
+
+            </div>
         </div>
 
 
@@ -109,19 +130,23 @@
 
         </div>
     </div>
-    <div id="guessed" class="col-2 justify-content-center">
+    <div class="buttons row justify-content-center">
+        <div id="guessed" class="col-2 justify-content-center">
 
-    </div>
-    <div class="m-5 gameplay-btns">
-        <button id="submitAns" class="btn btn-primary">
+        </div>
+        <div class="w-100"></div>
+        <button id="submitAns" class="btn btn-primary col-2">
             Submit
         </button>
-        <button id="clearAns" class="btn btn-secondary">
+        <div class="w-100"></div>
+        <button id="clearAns" class="btn btn-secondary col-2">
             Clear
         </button>
     </div>
+    <div class="gameplay-btns m-5">
 
-    <footer>
+    </div>
+    <footer class="mt-auto">
         NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the
         property of the NHL and its teams. © NHL 2023. All Rights Reserved.
     </footer>
