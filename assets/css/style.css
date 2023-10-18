@@ -82,21 +82,9 @@ body {
     font-size: larger;
 }
 
-.leaderBoardBtn {
-    margin-left: 30%;
-}
-
 .leaderBoard {
-    margin-left: 20%;
-}
-
-.nhlWebsite {
-    margin-left: 50%;
-}
-
-.nhlWebsiteBtn {
-    position: absolute;
-    margin-left: 30%;
+    display: flex;
+    justify-content: end;
 }
 
 .hidden {
