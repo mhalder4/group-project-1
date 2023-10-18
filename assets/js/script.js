@@ -430,12 +430,6 @@ startTimer();
 // console.log(teamPromise);
 // console.log(teamArr[0].teamName);
 
-async function asyncTest() {
-  console.log("Test Started");
-  const result = await teamPromise;
-  console.log(result[0]);
-}
-
 // the ansArr and count variables make it so the user can only select 2 teams from the choices
 var guessedHome;
 var guessedAway;
