@@ -16,6 +16,8 @@ const metropolitan = ["CAR", "CBJ", "NJD", "NYI", "NYR", "PHI", "PIT", "WSH"];
 const atlantic = ["BOS", "BUF", "DET", "FLA", "MTL", "OTT", "TBL", "TOR"];
 const central = ["ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL", "WPG"];
 const pacific = ["ANA", "CGY", "EDM", "LAK", "SJS", "SEA", "VAN", "VGK"];
+const divisions = ["Eastern", "Metropolitan", "Central", "Pacific"];
+const arrays = [atlantic, metropolitan, central, pacific];
 
 const Eastern = metropolitan.concat(atlantic);
 const Western = central.concat(pacific);
@@ -56,13 +58,6 @@ function randomizeGameId() {
   console.log(gameID);
   return gameID;
 }
-// THIS NEEDS TO BE RESTRUCTURED
-// combines all team abbreviations of the different divisions
-function concatArrays(arr1, arr2, arr3, arr4) {
-  var arr = arr1.concat(arr2, arr3, arr4);
-  arr.sort();
-  return arr;
-}
 
 var allTeamAbbr = [];
 
@@ -86,7 +81,7 @@ function pullTeamLogo(abbrArray) {
     var teamLogo = $("<img>");
     teamLogo.attr("src", logoURL);
     teamLogo.attr("class", "logo");
-    teamLogo.attr("id", abbrArray[index]);
+    teamLogo.attr("id", item);
     teamLogo.attr("style", "width: 100px; height: 100px");
     // elem.append(teamLogo);
     return teamLogo;
@@ -140,8 +135,8 @@ function addTeamLogos() {
 
 function showLogoClicked(code) {
 
-  var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
-  bodyElem.append(displayLogo);
+  var displayLogo = `<img src="https://assets.nhle.com/logos/nhl/svg/${code}_light.svg" class="logo" id="ANA" style="width: 100px; height: 100px">`;
+  $("#guessed").append(displayLogo);
 
   // var displayLogo = pullTeamLogo(allTeamAbbr, allTeamAbbr.indexOf(code));
   // $("#guessed").append(displayLogo);
@@ -341,9 +336,9 @@ var teamPromise = () => fetch(gameURL)
     console.log(venue);
     let venueLink = venue.replaceAll(" ", "+");
     // ADBLOCKER MUST BE DISABLED FOR THIS TO WORK
-    $("body").append(`
+    $("#column-3-6").append(`
     <iframe
-      style="display: none"
+      style="display: show"
       width="500"
       height="300"
       style="border:0"
@@ -362,7 +357,6 @@ var teamPromise = () => fetch(gameURL)
 
   })
 
-// pullTeamLogo(atlantic, metropolitan, central, pacific, "first");
 
 addTeamLogos();
 addHints();
@@ -374,9 +368,6 @@ async function asyncTest() {
   const result = await teamPromise;
   console.log(result[0]);
 }
-
-
-console.log(atlantic.concat(metropolitan, central, pacific));
 
 // the ansArr and count variables make it so the user can only select 2 teams from the choices
 var guessedHome;
@@ -430,7 +421,6 @@ $("#submitAns").on("click", function () {
   count = 0;
   roundCounter++;
   console.log(checks);
-  console.log(homeConf)
   if (roundCounter === 1) {
     logosIndex = 0;
     allTeamAbbr = [];
@@ -451,11 +441,24 @@ $("#submitAns").on("click", function () {
     if (roundCounter === 2) {
       logosIndex = 0;
       allTeamAbbr = [];
-      allTeamAbbr = homeDivi.concat(awayDivi);
+      divisions.forEach( function(item) {
+        if (homeDivi === item) {
+          allTeamAbbr = arrays[item];
+        }
+      })
+      if (homeDivi != awayDivi) {
+        divisions.forEach(function(item) {
+          if (awayDivi === item) {
+            allTeamAbbr.concat(arrays[item]);
+          }
+        })
+      }
+      }
+      
+      
       allTeamAbbr.sort();
       console.log(allTeamAbbr)
       addTeamLogos();
 
     }
-  }
-})
+  })
