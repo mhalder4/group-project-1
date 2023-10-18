@@ -86,3 +86,9 @@ footer {
 body{
     background-color: black;
 }
+
+@media screen and (max-width: 415px){
+    h3 { 
+        font-size: 1.1rem;
+    }
+}
