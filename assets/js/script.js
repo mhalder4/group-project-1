@@ -16,7 +16,7 @@ const metropolitan = ["CAR", "CBJ", "NJD", "NYI", "NYR", "PHI", "PIT", "WSH"];
 const atlantic = ["BOS", "BUF", "DET", "FLA", "MTL", "OTT", "TBL", "TOR"];
 const central = ["ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL", "WPG"];
 const pacific = ["ANA", "CGY", "EDM", "LAK", "SJS", "SEA", "VAN", "VGK"];
-const divisions = ["Eastern", "Metropolitan", "Central", "Pacific"];
+const divisions = ["Atlantic", "Metropolitan", "Central", "Pacific"];
 const arrays = [atlantic, metropolitan, central, pacific];
 
 const Eastern = metropolitan.concat(atlantic);
@@ -438,27 +438,28 @@ $("#submitAns").on("click", function () {
     allTeamAbbr.sort();
     console.log(allTeamAbbr)
     addTeamLogos();
-    if (roundCounter === 2) {
-      logosIndex = 0;
-      allTeamAbbr = [];
-      divisions.forEach( function(item) {
-        if (homeDivi === item) {
-          allTeamAbbr = arrays[item];
-        }
-      })
-      if (homeDivi != awayDivi) {
-        divisions.forEach(function(item) {
-          if (awayDivi === item) {
-            allTeamAbbr.concat(arrays[item]);
-          }
-        })
+  }
+  if (roundCounter === 2) {
+    logosIndex = 0;
+    allTeamAbbr = [];
+    for (var i = 0; i < divisions.length; i++) {
+      if (homeDivi === divisions[i]) {
+        allTeamAbbr = arrays[i];
       }
-      }
-      
-      
-      allTeamAbbr.sort();
-      console.log(allTeamAbbr)
-      addTeamLogos();
-
     }
-  })
+    if (homeDivi != awayDivi) {
+      for (i = 0; i < divisions.length; i++) {
+        if (awayDivi === divisions[i]) {
+          allTeamAbbr = allTeamAbbr.concat(arrays[i]);
+        }
+      }
+    }
+    
+    
+    allTeamAbbr.sort();
+    console.log(allTeamAbbr)
+    addTeamLogos();
+  }
+
+  }
+  )
