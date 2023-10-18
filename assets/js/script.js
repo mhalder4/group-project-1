@@ -3,9 +3,9 @@ const logosMainElem = $(".team-logos");
 
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
+/* const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay') */
 
 var homeTeam;
 var awayTeam;
@@ -139,7 +139,7 @@ function showLogoClicked(code) {
 
 
 
-openModalButtons.forEach(button => {
+/* openModalButtons.forEach(button => {
   button.addEventListener('click', () => {
     const modal = document.querySelector(button.dataset.modalTarget)
     openModal(modal)
@@ -170,7 +170,7 @@ function closeModal(modal){
   if (modal == null) return
   modal.classList.add('active')
   overlay.classList.add('active')
-}
+} */
 
 // function store
 
