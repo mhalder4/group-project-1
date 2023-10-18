@@ -1,4 +1,6 @@
-
+.icon {
+    height: 100px;
+}
 .question-box {
     background-color: lightgrey;
     width: 300px;
@@ -31,7 +33,8 @@ main {
 }
 .banner{
     position: absolute;
-    width: 15%;
+    width: 75%;
+    
 }
 .icon{
     width: 5%;
