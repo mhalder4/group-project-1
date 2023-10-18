@@ -10,6 +10,7 @@ const overlay = document.getElementById('overlay')
 var homeTeam;
 var awayTeam;
 
+var hints = 0;
 var roundCounter = 0;
 
 const metropolitan = ["CAR", "CBJ", "NJD", "NYI", "NYR", "PHI", "PIT", "WSH"];
