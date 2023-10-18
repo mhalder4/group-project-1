@@ -3,9 +3,9 @@ const logosMainElem = $(".team-logos");
 
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
+/* const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay') */
 
 var homeTeam;
 var awayTeam;
@@ -143,6 +143,8 @@ function showLogoClicked(code) {
   // $("#guessed").append(displayLogo);
 }
 
+
+
 async function addHints() {
   const homeScoreHintElem = $(`#column-2-2`);
   const awayScoreHintElem = $(`#column-3-2`);
@@ -153,6 +155,7 @@ async function addHints() {
   const homePlayersHintElem = $(`#column-2-5`);
   const awayPlayersHintElem = $(`#column-3-5`);
   const venueHintElem = $(`#column-2-6`);
+
 
   // console.log(homeTeam);
 
@@ -195,6 +198,7 @@ async function addHints() {
   awayPlayersHintElem.append(awayPlayersHint);
   venueHintElem.text(venue);
 }
+
 
 function addPlayersToList(playerArr) {
   var playerListElem = $("<ul>");
