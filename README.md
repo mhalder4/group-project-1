@@ -25,13 +25,11 @@ Then just press play!
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+1. Press the "Play" button to start the game!
+2. You are given a Hockey Game Score.
+3. You make a guess of which two teams played in that game.
+4. If it's wrong, you will get some hints.
+5. you get 5 chances to guess.
 
 ## Credits
 
@@ -67,4 +65,8 @@ The last section of a high-quality README file is the license. This lets other d
 ## Features
 
 As a user you can:
+
+1. access the NHL website by clicking NHL icon.
+2. access the leader board of top players.
+3. use google maps as a hint to where the game was played.
 

@@ -33,22 +33,11 @@ main {
 }
 .banner{
     position: absolute;
-<<<<<<< HEAD
     width: 15%;
     
-    
 }
 .icon{
     width: 5%;
-
-
-=======
-    width: 75%;
-    height: 100px;
-}
-.icon{
-    width: 5%;
->>>>>>> origin
 }
 .my-column h2{
     border: 2px solid black;
