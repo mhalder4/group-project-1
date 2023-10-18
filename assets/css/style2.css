@@ -13,18 +13,22 @@ main {
     align-items: center;
     background-image: url("");
 }
+
 .titles {
-    border-bottom:solid black 2px;
+    border-bottom: solid black 2px;
 }
-.title-1{
+
+.title-1 {
     color: rgb(203, 203, 227);
-    
+
 }
-.column-all{
+
+.column-all {
     display: flex;
 
 }
-.my-column{
+
+.my-column {
     display: flex;
     flex-basis: 30%;
     flex-direction: column;
@@ -33,24 +37,29 @@ main {
     border: 2px solid black;
 
 }
-.banner{
+
+.banner {
     position: absolute;
     width: 15%;
 
 }
-.icon{
+
+.icon {
     margin-left: 40%;
     width: 5%;
 }
-.my-column h2{
+
+.my-column h2 {
     border: 2px solid black;
     padding: 20px 50px;
 }
-.my-column .row-1{
+
+.my-column .row-1 {
     padding: 20px 70px;
 }
-#column-2-1{
-    color:brown;
+
+#column-2-1 {
+    color: brown;
 }
 
 .gameInfo {
@@ -64,31 +73,45 @@ main {
 }
 
 #googleMap {
-    width:300px;
-    height:350px;
-    border:0;
+    width: 300px;
+    height: 350px;
+    border: 0;
 }
 
 button {
-    width:50%;
+    width: 50%;
 }
 
 footer {
     margin-top: auto;
-    text-align:center;
-     position: fixed;
-     bottom: 0px;
-     width: auto;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    width: auto;
 }
-.col-3{
+
+.col-3 {
     color: aqua;
 }
-body{
+
+body {
     background-color: black;
 }
 
-@media screen and (max-width: 415px){
-    h3 { 
+.gameplay-btns {
+    margin-bottom: 6rem;
+}
+
+footer {
+    background-color: aliceblue;
+}
+
+@media screen and (max-width: 415px) {
+    h3 {
         font-size: 1.1rem;
+    }
+
+    footer {
+        font-size: 0.5rem;
     }
 }

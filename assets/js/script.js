@@ -102,9 +102,9 @@ function manageHighScores(arr) {
 }
 
 function addHighScores() {
-  highscores.forEach(function (player) {
-    console.log(player.score);
-  })
+  // highscores.forEach(function (player) {
+  //   console.log(player.score);
+  // })
 
   for (var i = 0; i < highscores.length; i++) {
     const nameElem = $(`.${i + 1}-fullname`);
@@ -340,8 +340,8 @@ function checkGameOver() {
   if (roundCounter === 5 || (isHomeCorrect && isAwayCorrect)) {
     gameBtnsElem.append(`
       <form class="score-submit">
-        <h2>You scored ${roundCounter} with a time of ${timerSec} seconds</h2>
-        <h3>Add your name below</h3>
+        <h2 class="text-white">You scored ${roundCounter} with a time of ${timerSec} seconds</h2>
+        <h3 class="text-white">Add your name below</h3>
         <div class="form-row">
           <div class="col">
             <input type="text" class="form-control-first" placeholder="First name">
@@ -613,7 +613,7 @@ gameBtnsElem.on("click", ".btn-save", function () {
 
 
   if (firstName === "" || lastName === "") {
-    formElem.append(`<p>Please add a first and last name.</p>`);
+    formElem.append(`<p class="text-white">Please add a first and last name.</p>`);
   } else {
     var name = firstName + " " + lastName;
 
@@ -625,6 +625,7 @@ gameBtnsElem.on("click", ".btn-save", function () {
     highscores.push(player);
     updateLocalStorage();
     formElem.remove();
+    gameBtnsElem.append(`<h4 class="text-white">Reload the page to try again</h4>`);
   }
 
 })
