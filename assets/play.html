@@ -26,14 +26,51 @@
     </div>
 
     <div id="gameInfo">
-        <div class="row justify-content-center">
-            <h1 class="col-2">Score:</h1>
-            <h1 class="col-3" id="scoreBox"></h1>
-            <h1 class="col-3">Time: <span id="timer-display">0</span></h1>
+        <div class="row titles justify-content-evenly">
+            <h3 class="col-3">Hints</h3>
+            <h3 class="col-3">Home Team</h3>
+            <h3 class="col-3">Away Team</h3>
+            <h3 class="col-3">Guesses</h3>
+
+        </div>
+        <div class="row scores justify-content-evenly">
+            <h3 class="col-3">Scores</h3>
+            <h3 class="col-3" id="homeScore"></h3>
+            <h3 class="col-3" id="awayScore"></h3>
+            <h3 class="col-3" id="guess1"></h3>
+
+        </div>
+        <div class="row conference justify-content-evenly" style="display:none">
+            <h3 class="col-3">Conference</h3>
+            <h3 class="col-3" id="homeConf"></h3>
+            <h3 class="col-3" id="awayConf"></h3>
+            <h3 class="col-3" id="guess2"></h3>
+
+        </div>
+        <div class="row division justify-content-evenly" style="display:none">
+            <h3 class="col-3">Division</h3>
+            <h3 class="col-3" id="homeDivi"></h3>
+            <h3 class="col-3" id="awayDivi"></h3>
+            <h3 class="col-3" id="guess3"></h3>
+
+        </div>
+        <div class="row players justify-content-evenly" style="display:none">
+            <h3 class="col-3">Players</h3>
+            <h3 class="col-3" id="homePlayers"></h3>
+            <h3 class="col-3" id="awayPlayers"></h3>
+            <h3 class="col-3" id="guess4"></h3>
+
+        </div>
+        <div class="row location justify-content-evenly" style="display:none">
+            <h3 class="col-3">Location</h3>
+            <h3 class="col-3" id="venue">Bell Arena</h3>
+            <h3 class="col-3" id="googleMap"></h3>
+            <h3 class="col-3" id="guess5"></h3>
+
         </div>
 
 
-    </div>
+        <!-- </div>
 
     <div class="column-all justify-content-evenly">
         <div class="my-column first-column ">
@@ -60,7 +97,7 @@
             <h2 class="row-5" id="column-3-5"></h2>
             <h2 class="row-6" id="column-3-6"></h2>
 
-        </div>
+        </div> -->
     </div>
 
     <div class="container team-logos mx-auto">
@@ -71,11 +108,16 @@
     <div id="guessed" class="col-2 justify-content-center">
 
     </div>
-    <button id="submitAns" class="btn btn-secondary">
+    <button id="submitAns" class="btn btn-primary">
         Submit
     </button>
+    <button id="clearAns" class="btn btn-secondary">
+        Clear
+    </button>
 
-    <footer class="logo">
+    <footer>
+        NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the
+        property of the NHL and its teams. © NHL 2023. All Rights Reserved.
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
         integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
