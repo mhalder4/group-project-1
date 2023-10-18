@@ -1,6 +1,3 @@
-.icon {
-    height: 100px;
-}
 .question-box {
     background-color: lightgrey;
     width: 300px;
@@ -34,9 +31,10 @@ main {
 .banner{
     position: absolute;
     width: 15%;
-    
+
 }
 .icon{
+    margin-left: 40%;
     width: 5%;
 }
 .my-column h2{
@@ -59,4 +57,10 @@ footer {
      position: fixed;
      bottom: 0px;
      width: auto;
+}
+.col-3{
+    color: aqua;
+}
+body{
+    background-color: black;
 }

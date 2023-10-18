@@ -81,6 +81,7 @@ body {
     font-size: larger;
 }
 
+
 .button2{
     margin-right: 25%;
     background-color: black;
@@ -92,11 +93,14 @@ body {
     margin-right: 20%;
     width: 15px;
     size-adjust: 10px;
+    display: flex;
+    justify-content: end;
 }
 
 .nhlWebsite {
     margin-right: 150%;
 }
+
 
 
 .hidden {
