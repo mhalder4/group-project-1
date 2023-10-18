@@ -1,5 +1,6 @@
 const bodyElem = $("body");
 const logosMainElem = $(".team-logos");
+const timerElem = $("#timer-display");
 
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
@@ -10,8 +11,9 @@ const overlay = document.getElementById('overlay') */
 var homeTeam;
 var awayTeam;
 
-var hints = 0;
 var roundCounter = 0;
+
+var timerSec = 0;
 
 const metropolitan = ["CAR", "CBJ", "NJD", "NYI", "NYR", "PHI", "PIT", "WSH"];
 const atlantic = ["BOS", "BUF", "DET", "FLA", "MTL", "OTT", "TBL", "TOR"];
@@ -33,12 +35,47 @@ function Team(isHome, name, abbr, score, conf, divi, players) {
   this.teamPlayers = players;
 };
 
+var highscores = [];
+
 
 
 // The ID of the game. The first 4 digits identify the season of the game (ie. 2017 for the 2017-2018 season). The next 2 digits give the type of game, where 01 = preseason, 02 = regular season, 03 = playoffs, 04 = all-star. The final 4 digits identify the specific game number. For regular season and preseason games, this ranges from 0001 to the number of games played. (1271 for seasons with 31 teams (2017 and onwards) and 1230 for seasons with 30 teams). For playoff games, the 2nd digit of the specific number gives the round of the playoffs, the 3rd digit specifies the matchup, and the 4th digit specifies the game (out of 7).
 
+
+
+// Loads local storage
+function loadLocalStorage() {
+  var tempScores = JSON.parse(localStorage.getItem("highscores"));
+  if (tempScores !== null) {
+    tempScores.forEach(function (object) {
+      highscores.push(object);
+    });
+  }
+}
+
+// Updates local storage
+function updateLocalStorage() {
+  localStorage.setItem("highscores", JSON.stringify(highscores));
+}
+
 function generateRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function startTimer() {
+  timerSec = 0;
+
+  var timeInterval = setInterval(function () {
+    timerSec++;
+
+    timerElem.text(timerSec);
+
+    if (timerSec === 600) {
+      clearInterval(timeInterval);
+    }
+
+
+  }, 1000)
 }
 
 // randomly picks a number for the gameID - this essentially randomly picks a game from the season
@@ -222,6 +259,25 @@ function addPlayersToList(playerArr) {
 
 }
 
+function pullFiveRandomItems(arr) {
+  let exclusiveArr = [];
+  for (var i = 0; i < 5; i++) {
+    let length = arr.length;
+    // console.log(length);
+    let randomIndex = generateRandomNumber(0, length - 1);
+    // console.log(randomIndex);
+    exclusiveArr.push(arr[randomIndex]);
+    arr.splice(randomIndex, 1);
+    // console.log(arr);
+  }
+
+  return exclusiveArr;
+}
+
+
+
+
+
 // overlay.addEventListener('click', () => {
 //   const modals = document.querySelectorAll('.modal.active')
 //   modals.forEach(modal => {
@@ -274,7 +330,7 @@ var teamPromise = () => fetch(gameURL)
     return response.json();
   })
   .then(async function (data) {
-    // console.log(data);
+    console.log(data);
     // console.log(dayjs(data.gameData.datetime.dateTime).format("MMM DD, YYYY"))
     // console.log(data.gameData.teams.home.name);
     // console.log(data.gameData.teams.home.abbreviation);
@@ -290,7 +346,9 @@ var teamPromise = () => fetch(gameURL)
 
 
 
-    var homePeople = data.liveData.boxscore.teams.home.onIce;
+    // var homePeople = data.liveData.boxscore.teams.home.onIce;
+    var homeSkaters = data.liveData.boxscore.teams.home.skaters;
+    var homePeople = pullFiveRandomItems(homeSkaters);
     let homePlayers = await Promise.all(homePeople.map(async function (item) {
       let response = await fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
 
@@ -319,7 +377,9 @@ var teamPromise = () => fetch(gameURL)
     awayScore = (data.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals);
 
 
-    var awayPeople = data.liveData.boxscore.teams.away.onIce;
+    // var awayPeople = data.liveData.boxscore.teams.away.onIce;
+    var awaySkaters = data.liveData.boxscore.teams.away.skaters;
+    var awayPeople = pullFiveRandomItems(awaySkaters);
     let awayPlayers = await Promise.all(awayPeople.map(async function (item) {
       let response = await fetch(`https://statsapi.web.nhl.com/api/v1/people/${item}`)
 
@@ -365,6 +425,8 @@ var teamPromise = () => fetch(gameURL)
 
 addTeamLogos();
 addHints();
+startTimer();
+
 // console.log(teamPromise);
 // console.log(teamArr[0].teamName);
 
