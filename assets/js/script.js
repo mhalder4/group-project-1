@@ -491,6 +491,7 @@ $("#submitAns").on("click", function () {
   }
   if (roundCounter === 5) {
     $("#guess5").text(checks);
+    $(".buttons").attr("style", "display:none");
   }
   
   }

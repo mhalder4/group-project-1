@@ -52,11 +52,21 @@ main {
 
 .gameInfo {
     border-bottom: solid black 3px;
+    margin: auto;
+}
+
+.team-logos {
+    border: solid black 3px;
+    border-radius: 10px;
+}
+
+button {
+    width:50%;
 }
 
 footer {
+    margin-top: auto;
     text-align:center;
-     position: fixed;
-     bottom: 0px;
-     width: auto;
+    bottom: 0px;
+    width: auto;
 }
