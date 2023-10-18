@@ -58,3 +58,9 @@ footer {
      bottom: 0px;
      width: auto;
 }
+.col-3{
+    color: aqua;
+}
+body{
+    background-color: black;
+}
