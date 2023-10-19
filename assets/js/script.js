@@ -1,10 +1,13 @@
 const bodyElem = $("body");
 const logosMainElem = $(".team-logos");
+
 const timerElem = $("#timer-display");
 const gameBtnsElem = $(".gameplay-btns");
 
+
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
+
 
 var homeTeam;
 var awayTeam;
