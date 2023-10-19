@@ -351,7 +351,7 @@ function checkGameOver() {
               <input type="text" class="form-control-last row justify-content-center col-6 col-md-2" placeholder="Last name">
           </div>
           <div class="row justify-content-center">
-          <button type="button" class="btn btn-success btn-save col-6">Save score</button>
+          <button type="button" class="btn btn-success btn-save col-6 col-md-2">Save score</button>
           </div>
         </div>
         
