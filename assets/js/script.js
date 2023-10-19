@@ -340,16 +340,18 @@ function checkGameOver() {
   if (roundCounter === 5 || (isHomeCorrect && isAwayCorrect)) {
     gameBtnsElem.append(`
       <form class="score-submit">
-        <h2 class="text-white">You scored ${roundCounter} with a time of ${timerSec} seconds</h2>
-        <h3 class="text-white">Add your name below</h3>
+        <h2 class="text-white row justify-content-center">You scored ${roundCounter} with a time of ${timerSec} seconds</h2>
+        <h3 class="text-white row justify-content-center">Add your name below</h3>
         <div class="form-row">
-          <div class="col">
-            <input type="text" class="form-control-first" placeholder="First name">
+          <div class="row justify-content-center">
+            <input type="text" class="form-control-first row justify-content-center col-2" placeholder="First name">
           </div>
-          <div class="col">
-              <input type="text" class="form-control-last" placeholder="Last name">
+          <div class="row justify-content-center">
+              <input type="text" class="form-control-last row justify-content-center col-2" placeholder="Last name">
           </div>
-          <button type="button" class="btn btn-success btn-save">Save score</button>
+          <div class="row justify-content-center">
+          <button type="button" class="btn btn-success btn-save col-6">Save score</button>
+          </div>
         </div>
         
       </form>`);
@@ -532,11 +534,13 @@ function checkAnswers() {
   checks = checks.replace(",", " ");
 }
 
+$("#clearAns").on("click", function() {
 $("#guessed").empty();
 guessedHome = "";
 guessedAway = "";
 ansArr = [];
 count = 0;
+})
 
 $("#submitAns").on("click", function () {
   checkAnswers();
@@ -625,7 +629,11 @@ gameBtnsElem.on("click", ".btn-save", function () {
     highscores.push(player);
     updateLocalStorage();
     formElem.remove();
-    gameBtnsElem.append(`<h4 class="text-white">Reload the page to try again</h4>`);
+    $("#playAgain").attr("style", "display:show");
   }
 
+})
+
+$("#playAgain").on("click", function() {
+  location.reload();
 })

@@ -68,7 +68,7 @@ main {
 }
 
 .team-logos {
-    border: solid black 3px;
+    border: solid aqua 3px;
     border-radius: 10px;
 }
 
@@ -80,14 +80,6 @@ main {
 
 button {
     width: 50%;
-}
-
-footer {
-    margin-top: auto;
-    text-align: center;
-    position: fixed;
-    bottom: 0px;
-    width: auto;
 }
 
 .col-3 {
@@ -103,7 +95,8 @@ body {
 }
 
 footer {
-    background-color: aliceblue;
+    text-align: center;
+    color: aqua;
 }
 
 @media screen and (max-width: 415px) {
