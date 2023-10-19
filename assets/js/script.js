@@ -338,16 +338,17 @@ function pullFiveRandomItems(arr) {
 
 function checkGameOver() {
   if (roundCounter === 5 || (isHomeCorrect && isAwayCorrect)) {
+    $(".buttons").attr("style", "display:none");
     gameBtnsElem.append(`
       <form class="score-submit">
         <h2 class="text-white row justify-content-center">You scored ${roundCounter} with a time of ${timerSec} seconds</h2>
         <h3 class="text-white row justify-content-center">Add your name below</h3>
         <div class="form-row">
           <div class="row justify-content-center">
-            <input type="text" class="form-control-first row justify-content-center col-2" placeholder="First name">
+            <input type="text" class="form-control-first row justify-content-center col-6 col-md-2" placeholder="First name">
           </div>
           <div class="row justify-content-center">
-              <input type="text" class="form-control-last row justify-content-center col-2" placeholder="Last name">
+              <input type="text" class="form-control-last row justify-content-center col-6 col-md-2" placeholder="Last name">
           </div>
           <div class="row justify-content-center">
           <button type="button" class="btn btn-success btn-save col-6">Save score</button>

@@ -107,4 +107,11 @@ footer {
     footer {
         font-size: 0.5rem;
     }
+    .icon {
+        width: 25%;
+        margin-left: 0;
+    }
+    .banner {
+        width: 75%;
+    }
 }
