@@ -1,22 +1,9 @@
 const bodyElem = $("body");
 const logosMainElem = $(".team-logos");
-var themeButtonEl = $(".button2");
 
 var gameURL = "https://statsapi.web.nhl.com/api/v1/game/";
 var gameID;
 
-var isDark = true;
-
-themeButtonEl.on('click', function () {
-  console.log("button clicked")
-  if (isDark) {
-    $('body').attr("style", "background-color: #D9E9E8; color: #1A1A1A" );
-    isDark = !isDark;
-  } else {
-    $('body').attr("style", "background-color: #1A1A1A; color: #D9E9E8" );
-    isDark = !isDark;
-  }
-});
 
 var homeTeam;
 var awayTeam;
